@@ -1,22 +1,21 @@
 
 const express = require('express');
 const app = express();
-//app.use(express.json());
+app.use(express.json());
 
 
 const arrUsers = [{id:1, user:'', password:'' }];
 
+app.listen(4000,()=>console.log('Servidor levantado en 4000'));
+
+
 //CREAR USUARIO
 
-app.post('/movies/:id',(req,res)=>{
-    const id = req.params;
-    const user = req.body;
-    const password = req.body;
-    let users = arrUsers.filter(user => user.id != id);
-    let user0 = {id,user, password};
-    users.push(user0);
-    res.json(user0);
-
+app.post('/users',(req,res)=> {
+    const {id,user,password} = req.body;
+    const users = {id,user,password};
+    arrUsers.push(users);
+    res.json(users);
 })
 
 //PERFIL

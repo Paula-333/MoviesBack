@@ -1,3 +1,10 @@
+
+const express = require('express');
+const app = express();
+app.use(express.json());
+
+app.listen(4000,()=>console.log('Servidor levantado en 4000'));
+
 app.post('/request/order/:id', (req, res) => {
 
 let arrMovies = [
@@ -23,12 +30,12 @@ res.send('Order ID: ' + req.params.order + 'Pelicula: ' + req.body.pelicula + Da
 //const user = arrUsers.push();
 
 //CREAR AÑADIR
-app.post('/movies',(req,res)=> {
-    const {id, tittle} = req.body;
-    const movie1 = {id, tittle};
-    arrMovies.push(movie1);
-    res.json(movie1);
-})
+//app.post('/movies',(req,res)=> {
+    //const {id, tittle} = req.body;
+    //const movie1 = {id, tittle};
+    //arrMovies.push(movie1);
+    //res.json(movie1);
+//})
 
 //MODIFICAR
 /*app.post('/movies/:id',(req,res)=>{
