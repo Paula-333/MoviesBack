@@ -35,24 +35,6 @@ app.get('/movies/:id',(req,res)=>{
     res.json(movie);
 });
 
-//CREAR AÑADIR
-app.post('/movies',(req,res)=> {
-    const {id, tittle} = req.body;
-    const movie1 = {id, tittle};
-    arrMovies.push(movie1);
-    res.json(movie1);
-})
-
-//MODIFICAR
-app.post('/movies/:id',(req,res)=>{
-    const id = req.params;
-    const tittle = req.body;
-    let moviesList = arrMovies.filter(movie => movie.id != id);
-    let movies = {id, tittle};
-    moviesList.push(movies);
-    res.json(movies);
-
-})
 //BUSCAR POT TITULO
 
 app.get('/movie', (req,res)=> {

@@ -5,7 +5,6 @@ const app = express();
 
 
 const arrUsers = [{id:1, user:'', password:'' }];
-const user = arrUsers.push();
 
 //CREAR USUARIO
 
