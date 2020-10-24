@@ -53,8 +53,10 @@ app.post('/movies/:id',(req,res)=>{
     res.json(movies);
 
 })
+//BUSCAR POT TITULO
 
-/*app.get('/movie', (req,res)=> {
-    let {q} = req.query;
-    res.json(`${q}"`);
-})*/
+app.get('/movie', (req,res)=> {
+    let q = req.query;
+    let movie2 =  arrMovies.filter(item => item.tittle.includes(q));
+    res.json(movie2);
+})
