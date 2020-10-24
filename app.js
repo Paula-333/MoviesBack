@@ -21,7 +21,7 @@ let arrMovies = [
 
 //https 
 
-app.listen(3000,()=>console.log('Servidor levantado en 3000'));
+app.listen(000,()=>console.log('Servidor levantado en 4000'));
 
 app.get('/movies',(req,res)=>{
     res.json(arrMovies);

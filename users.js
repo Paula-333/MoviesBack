@@ -1,21 +1,35 @@
 
 const express = require('express');
 const app = express();
-app.use(express.json());
+//app.use(express.json());
 
 
-let users = [{
-    name:'',
-    password:''
-}]
-
-app.listen(3000,()=>console.log('Servidor levantado en 3000'));
+const arrUsers = [{id:1, user:'', password:'' }];
+const user = arrUsers.push();
 
 //CREAR USUARIO
 
-app.post('/users',(req,res)=> {
-    const {name, password} = req.body;
-    const users1 = {name, password};
-    users.push(users1);
-    res.json(users1);
+app.post('/movies/:id',(req,res)=>{
+    const id = req.params;
+    const user = req.body;
+    const password = req.body;
+    let users = arrUsers.filter(user => user.id != id);
+    let user0 = {id,user, password};
+    users.push(user0);
+    res.json(user0);
+
 })
+
+//PERFIL
+app.get('/users/:id',(req,res)=>{
+    const id= req.params.id;
+    const users1  = arrUsers.find(users1 => movie.id == id);
+    res.json(users1);
+});
+
+//DELETE
+
+
+
+
+
