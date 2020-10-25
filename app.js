@@ -1,11 +1,10 @@
 
 const express = require('express')
 const app = express();
-const PORT = 4200;
-//const bodyParser = require(bodyParser);
+const PORT = 5201;
 
-app.use(express.json()); //req.body
-//app.use(bodyParser.json()); //req.body
+
+app.use(express.json());
 
 
 let arrMovies = [
@@ -18,17 +17,18 @@ let arrMovies = [
     {id:'6', tittle: 'Una rubia muy legal'},
     {id:'7', tittle: 'Princesa por sorpresa'},
     {id:'8', tittle: 'El sueño de mi vida'},
+
 ]
 
-//https 
+//..::PELICULAS::..
 
-app.listen(PORT,()=>console.log('Servidor levantado en 4200'));
+app.listen(PORT,()=>console.log('Servidor levantado en ' + PORT));
 
 app.get('/movies',(req,res)=>{
     res.json(arrMovies);
 })
 
-//BUSCAR POR ID
+//..BUSCAR POR ID..
 
 app.get('/movies/:id',(req,res)=>{
     const id= req.params.id;
@@ -36,7 +36,7 @@ app.get('/movies/:id',(req,res)=>{
     res.json(movie);
 });
 
-//BUSCAR POT TITULO
+//..BUSCAR POT TITULO..
 
 app.get('/movie', (req,res)=> {
     let {q} = req.query;
@@ -44,21 +44,21 @@ app.get('/movie', (req,res)=> {
     res.json(movieList);
 })
 
-//USUARIO
-const arrUsers = [{id:'', user:'', password:''}];
+//..::USUARIO::..
+const arrUsers = [{}];
 
 
-//CREAR USUARIO
+//..CREAR USUARIO..
 
 app.post('/users',(req,res)=> {
     const {id, user, password} = req.body;
-    const users = {id, user, password};
+    const users = [{id, user, password}];
     arrUsers.push(users);
     res.json(users);
 });
 
 
-//PERFIL
+//..PERFIL..
 
 app.get('/users/:id',(req,res)=>{
     const id= req.params.id;
@@ -66,17 +66,17 @@ app.get('/users/:id',(req,res)=>{
     res.json(users1);
 });
 
-//DELETE
+//..DELETE..
+
 
 app.delete('/users/delete/:id', (req,res)=>{
-    const id= req.params.id;
-    const usersDelete  = arrUsers.find(users1 => users1.id == id);
-    res.json(usersDelete);
+    let id = req.body.id;
+    let i = arrUsers.findIndex((item) => item.id === id);
+    arrUsers.splice(i, 1);
+    res.send(id + " eliminado"); 
 });
 
-
-
-//PEDIDOS
+//..::PEDIDOS::..
 
 const arrOrders = [
 
@@ -89,7 +89,6 @@ const arrOrders = [
     {order:007, id:7, tittle: 'Princesa por sorpresa'},
 
 ];
-
 
 app.get('/orders/:order', (req, res) => {
 
