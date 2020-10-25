@@ -4,9 +4,9 @@ const app = express();
 app.use(express.json());
 
 
-const arrUsers = [{id:1, user:'', password:'' }];
+const arrUsers = [{id:'', user:'', password:'' }];
 
-app.listen(4000,()=>console.log('Servidor levantado en 4000'));
+app.listen(3000,()=>console.log('Servidor levantado en 3000'));
 
 
 //CREAR USUARIO
@@ -18,6 +18,7 @@ app.post('/users',(req,res)=> {
     res.json(users);
 })
 
+
 //PERFIL
 app.get('/users/:id',(req,res)=>{
     const id= req.params.id;
@@ -27,7 +28,7 @@ app.get('/users/:id',(req,res)=>{
 
 //DELETE
 
-
+app.delete('/remove/:id', Heros.removeHero);
 
 
 
