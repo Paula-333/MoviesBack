@@ -1,7 +1,7 @@
 
 const express = require('express')
 const app = express();
-const PORT = 3200;
+const PORT = 4200;
 //const bodyParser = require(bodyParser);
 
 app.use(express.json()); //req.body
@@ -22,7 +22,7 @@ let arrMovies = [
 
 //https 
 
-app.listen(PORT,()=>console.log('Servidor levantado en 3200'));
+app.listen(PORT,()=>console.log('Servidor levantado en 4200'));
 
 app.get('/movies',(req,res)=>{
     res.json(arrMovies);
@@ -59,6 +59,7 @@ app.post('/users',(req,res)=> {
 
 
 //PERFIL
+
 app.get('/users/:id',(req,res)=>{
     const id= req.params.id;
     const users1  = arrUsers.find(users1 => users1.id == id);
@@ -77,8 +78,6 @@ app.delete('/users/delete/:id', (req,res)=>{
 
 //PEDIDOS
 
-app.post('/orders/:order', (req, res) => {
-
 const arrOrders = [
 
     {order:001, id:1, tittle: 'Como perder a un chico en 10 días'},
@@ -91,35 +90,14 @@ const arrOrders = [
 
 ];
 
-const date1 = new Date();
-//const date2 = new Date();
-const Devolucion = setDay(date1.getDay()+7);
-let order1 = req.params;
+
+app.get('/orders/:order', (req, res) => {
+
+const fecha = new Date();
+const fecha2 = new Date();
+const devolucion = fecha2.setDate(fecha2.getDate() + 7);
+const order = req.params;
 let movieChoose = req.body;
 
-res.json(`Order ID: ${order1.order} Pelicula: ${movieChoose} Fecha de alquiler:  ${date1} Fecha de devolución: ${Devolucion}`);
+res.json(`Order: ${order.order} Movie: ${movieChoose} Date: ${fecha} Date devolution: ${fecha2}`);
 });
-
-
-
-
-//const user = arrUsers.push();
-
-//CREAR AÑADIR
-//app.post('/movies',(req,res)=> {
-    //const {id, tittle} = req.body;
-    //const movie1 = {id, tittle};
-    //arrMovies.push(movie1);
-    //res.json(movie1);
-//})
-
-//MODIFICAR
-/*app.post('/movies/:id',(req,res)=>{
-    const id = req.params;
-    const tittle = req.body;
-    let moviesList = arrMovies.filter(movie => movie.id != id);
-    let movies = {id, tittle};
-    moviesList.push(movies);
-    res.json(movies);
-
-})*/
