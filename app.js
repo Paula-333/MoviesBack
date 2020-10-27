@@ -1,10 +1,15 @@
 
 const express = require('express')
 const app = express();
-const PORT = 5201;
+const PORT = 6201;
 
 
 app.use(express.json());
+
+app.use((req,res,next)=>{
+    console.log('Entrando');
+    next();
+});
 
 
 let arrMovies = [
@@ -45,6 +50,7 @@ app.get('/movie', (req,res)=> {
 })
 
 //..::USUARIO::..
+
 const arrUsers = [{}];
 
 
@@ -80,23 +86,43 @@ app.delete('/users/delete/:id', (req,res)=>{
 
 const arrOrders = [
 
-    {order:001, id:1, tittle: 'Como perder a un chico en 10 días'},
-    {order:002, id:2, tittle: 'Chicas malas'},
-    {order:003, id:3, tittle: 'Devuélveme mi suerte'},
-    {order:004, id:4, tittle: 'Bar Coyote'},
-    {order:005, id:5, tittle: 'Muévete, esto es Nueva York'},
-    {order:006, id:6, tittle: 'Una rubia muy legal'},
-    {order:007, id:7, tittle: 'Princesa por sorpresa'},
+    {order:'001', tittle: 'Como perder a un chico en 10 días'},
+    {order:'002', tittle: 'Chicas malas'},
+    {order:'003', tittle: 'Devuélveme mi suerte'},
+    {order:'004', tittle: 'Bar Coyote'},
+    {order:'005', tittle: 'Muévete, esto es Nueva York'},
+    {order:'006', tittle: 'Una rubia muy legal'},
+    {order:'007',  ittle: 'Princesa por sorpresa'},
 
 ];
 
-app.get('/orders/:order', (req, res) => {
-
-const fecha = new Date();
-const fecha2 = new Date();
-const devolucion = fecha2.setDate(fecha2.getDate() + 7);
-const order = req.params;
-let movieChoose = req.body;
-
-res.json(`Order: ${order.order} Movie: ${movieChoose} Date: ${fecha} Date devolution: ${fecha2}`);
+app.post('/order',(req,res)=> {
+    if(!getUserById(req.body.idUsuario)) {
+        res.status(400);
+        return res.json({error: 'El usuario no existe'})
+    }
+    const fechaEntrega = new Date();
+    fechaEntrega.setDay(fechaEntrega.getDay() + 7);
+    const order = {
+        idPedido: getRandom(1, 1000),
+        idUsuario: req.body.idUsuario,
+        idPelicula: req.body.idPelicula,
+        fechaPedido: new Date(),
+        fechaEntrega: fechaEntrega,
+    }
+    orders.push(order)
+    res.json(order);
 });
+
+
+//app.get('/orders/:order', (req, res) => {
+//const fechaDevolucion = new Date ();
+//fechaDevolucion.setDate(fecha.getDate()+7 )
+//const fecha = new Date();
+//const fecha2 = new Date();
+//const devolucion = fecha2.setDate(fecha2.getDate() + 7);
+//const order = req.params;
+//let movieChoose = req.body;
+
+//res.json(`Order: ${order.order} Movie: ${movieChoose} Date: ${fecha} Date devolution: ${fecha2}`);
+//});
