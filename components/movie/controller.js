@@ -2,12 +2,12 @@
 const Movie = require('./model')
 
 
-//..: TODAS LAS PELICULAS :..//
+//..: BUSQUEDA DE TODAS LAS PELICULAS, POR TITULO Y POR GENERO :..//
 
 module.exports.getMovies = async (req, res) =>{ //?tittle=MAtix&duration=90
     const query = {}
     if(req.query.tittle) query.tittle = req.query.tittle;
-    //if(req.query.genre) query.genre = req.query.genre;
+    if(req.query.genre) query.genre = req.query.genre;
     const data = await Movie.find(query); //si no pone nada busca todas
     res.json(data);
 };
@@ -16,7 +16,7 @@ module.exports.getMovies = async (req, res) =>{ //?tittle=MAtix&duration=90
 //..: BUSCAR POR ID :..//
 
 module.exports.getMovie = async (req,res)=>{
-    const data2 = await Movie.find({id: req.params.id});//findOne o findByID(?) dentro de uno de estos hay que poner una funcion seguramente con un if
+    const data2 = await Movie.findOne({_id: req.params.id});
     res.json(data2);
 }
 

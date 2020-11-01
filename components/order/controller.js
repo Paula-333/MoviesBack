@@ -1,6 +1,6 @@
-//const Order = require ('./model')
+const Order = require ('./model')
 
-//..: CREAR PEDIDO :..// Esto hay que probarlo por que no tengo ni idea 
+//..: CREAR PEDIDO :..// 
 
 module.exports.createOrder = async (req,res)=>{
     const order = new Order (req.body);
@@ -10,7 +10,3 @@ module.exports.createOrder = async (req,res)=>{
     await order.save();
     res.json(order);
 }
-
-
-//new OrderSchema({userId: 'sjhbdhsdbd', })
-//const orders = await OrderSchema.find({}).populate('userID');

@@ -1,7 +1,8 @@
 
 const User = require('./model')
-const jwt = require ('jasonwebtoken')
+const jwt = require ('jsonwebtoken')
 const secret = 'migatitobonito'
+
 
 //..: CREAR PERFIL :..//
 
@@ -27,7 +28,7 @@ module.exports.getUsers = async (req, res) =>{//?tittle=MAtix&duration=90
 
 module.exports.getUser = async (req,res)=>{
 
-    const data2 = await User.find({_id: req.params._id}) //findOne o findByID(?) dentro de uno de estos hay que poner una funcion seguramente con un if, bucle maximo
+    const data2 = await User.findOne({_id: req.params.id}) //findOne o findByID(?) dentro de uno de estos hay que poner una funcion seguramente con un if, bucle maximo
     res.json(data2);
 }
 
@@ -36,15 +37,23 @@ module.exports.getUser = async (req,res)=>{
 
 
 module.exports.removeUser = async (req, res) =>{
-     const data = await User.find({});
+    const data = await User.deleteOne(req.query.id); //si no pone nada busca todas
     res.json(data);
 };
 
 //..: LOGIN :..//
 //Creo que hay que meter el JWT en CREAR PERFIL o BUSCAR PERFIL pero por lo que hemos hablado en el descanso es otra cosa
 module.exports.login = (req, res,)=>{
+
     const {email,password} = req.body;
-    if (!email || !password )
+    if (!email || !password ) return res.json({error:'No encuentra el usuario'})
+    const data = User.find(e=> e.email === email && e.password === password);
+    if (!data) return res.json ({error: 'No es correcto'})
+    const token = jwt.sign({user:data.id}, secret, {expiresIn: 60 * 60 *24});
+    res.json({token: token, mensaje: 'login correcto'})
+
+    //validar token
+
 
 }
 
