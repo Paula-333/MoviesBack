@@ -4,7 +4,7 @@ const jwt = require ('jsonwebtoken')
 const secret = 'migatitobonito'
 
 
-//..: CREAR PERFIL :..//
+////////////////..: CREAR PERFIL :..////////////////
 
 module.exports.createUser = async (req,res)=>{
     const user = new Model (req.body);
@@ -12,48 +12,53 @@ module.exports.createUser = async (req,res)=>{
     res.json(user);
 }
 
-//..: TODOS LOS PERFILES :..// Creo que esto no haria falta, lo tengo para comprobar que se buscan los perfiles
 
-module.exports.getUsers = async (req, res) =>{//?tittle=MAtix&duration=90
-    //res.json([{id:1, tittle:'titanic'}])
-    const query = {}
-    if(req.query.name) query.tittle = req.query.name;
-    const data = await User.find(query); //si no pone nada busca todas
-    res.json(data);
-};
+///////////////..: LOGIN :..///////////////
+
+module.exports.login = (req, res, next)=>{
+    
+    const {email,password} = req.body;
+    if (!email || !password ) return res.json({error:'No encuentra el usuario'})
+
+    const data = User.find (e=> e.email === email && e.password === password);
+    if (!data) return res.json ({error: 'No es correcto'})
+
+    const token = jwt.sign({user:data.id}, secret, {expiresIn: 60 * 60 *24});
+    res.json({token: token, mensaje: 'login correcto'})
+
+    //validar token//Esto creo que es asi no me da ningun error.
+
+    jwt.verify(token, secret, function(err, token) {
+        if (err) {
+          return res.status(401).send({
+            ok: false,
+            message: 'Token inválido'
+          });
+        } else {
+          req.token = token
+          next()
+        }
+
+    });
+}
 
 
-//..: BUSCAR PERFIL :..//
+
+////////////..: BUSCAR PERFIL :..//////////////
 
 
 module.exports.getUser = async (req,res)=>{
 
-    const data2 = await User.findOne({_id: req.params.id}) //findOne o findByID(?) dentro de uno de estos hay que poner una funcion seguramente con un if, bucle maximo
+    const data2 = await User.findOne({_id: req.params.id})
     res.json(data2);
 }
 
 
-//..: BORRAR PERFIL :..//
+//////////////////..: BORRAR PERFIL :..////////////////////
 
 
 module.exports.removeUser = async (req, res) =>{
-    const data = await User.deleteOne(req.query.id); //si no pone nada busca todas
-    res.json(data);
-};
 
-//..: LOGIN :..//
-//Creo que hay que meter el JWT en CREAR PERFIL o BUSCAR PERFIL pero por lo que hemos hablado en el descanso es otra cosa
-module.exports.login = (req, res,)=>{
-
-    const {email,password} = req.body;
-    if (!email || !password ) return res.json({error:'No encuentra el usuario'})
-    const data = User.find(e=> e.email === email && e.password === password);
-    if (!data) return res.json ({error: 'No es correcto'})
-    const token = jwt.sign({user:data.id}, secret, {expiresIn: 60 * 60 *24});
-    res.json({token: token, mensaje: 'login correcto'})
-
-    //validar token
-
-
+    const remove = await User.deleteOne(req.query.id);
+    res.json(remove);
 }
-

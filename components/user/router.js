@@ -2,11 +2,11 @@
 const router = require('express').Router();
 const controller = require ('./controller.js');
 
-router.post('/', controller.createUser);
-router.post('/login', controller.login);
-router.get('/', controller.getUsers);
-router.get('/:id', controller.getUser);//meter login?(?)
-router.delete('/', controller.removeUser)
+router.post('/', controller.createUser);//CREAR USUARIO
+router.get('/', controller.getUsers);//TODOS LOS PERFILES
+router.post('/login', controller.login);//LOGIN
+router.get('/:id', controller.getUser);//BUSCAR PERFIL
+router.delete('/', controller.removeUser)//BORRAR PERFIL
 
 
 module.exports = router;
