@@ -4,6 +4,7 @@
 const e = require('express');
 const express = require('express')
 const app = express();
+const mong = require ('./config/mongoose.js');
 const routesMovie = require ('./components/movie/router.js');
 const routesUser = require ('./components/user/router.js');
 const routesOrder = require ('./components/order/router.js');
