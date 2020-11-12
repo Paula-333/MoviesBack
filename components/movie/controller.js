@@ -23,8 +23,8 @@ module.exports.getMovie = async (req,res)=>{
 
 //..: CREAR PELICULA :..//
 
-module.exports.createMovie = async (req,res)=>{
-    const movie = new Movie (req.body);
-    await movie.save();
-    res.json(movie);
-}
+//module.exports.createMovie = async (req,res)=>{
+    //const movie = new Movie (req.body);
+    //await movie.save();
+    //res.json(movie);
+//}
