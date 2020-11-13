@@ -12,8 +12,11 @@ const routesOrder = require ('./components/order/router.js');
 const PORT = 8208;
 
 const mongoose = require('mongoose');
-const MongoURI = process.env.MongoURI||'mongodb://localhost:27017/moviesback';
-mongoose.connect(MongoURI,{useCreateIndex:true,useNewUrlParser:true,useUnifiedTopology:true})
+//mongodb+srv://admin1:yrTKyfTqZYIFi6cH@cluster0.dp8tm.mongodb.net/moviesback?retryWrites=true&w=majority
+
+const MongoURI = process.env.MongoURI ||'mongodb://localhost:27017/moviesback';
+const monguri2 = "mongodb+srv://admin1:yrTKyfTqZYIFi6cH@cluster0.dp8tm.mongodb.net/moviesback?retryWrites=true&w=majority"
+mongoose.connect(monguri2,{useCreateIndex:true,useNewUrlParser:true,useUnifiedTopology:true})
 .then(()=> console.log('mongoose conectado' + MongoURI))
 .catch( e => console.error('mongoose erroneo ', e));
 //.then(()=>console.log('conected to Mongodb:'+MongoURI))
