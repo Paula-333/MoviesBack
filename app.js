@@ -9,7 +9,7 @@ const routesMovie = require ('./components/movie/router.js');
 const routesUser = require ('./components/user/router.js');
 const routesOrder = require ('./components/order/router.js');
 
-const PORT = 8208;
+const PORT = process.env.PORT || 3000;
 
 const mongoose = require('mongoose');
 //mongodb+srv://admin1:yrTKyfTqZYIFi6cH@cluster0.dp8tm.mongodb.net/moviesback?retryWrites=true&w=majority
