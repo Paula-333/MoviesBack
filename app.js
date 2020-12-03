@@ -45,6 +45,8 @@ app.use(function (req, res, next) { //para evitar el error CORS
     next();
 });
 
+app.get('/', (req, res) => res.send('Welcome'));
+
 
 ['unhandledRejection', 'uncaughtException'].forEach(event => process.on(event, (err) => {
     console.error(`unhandled error: ${err.stack || err}`);
