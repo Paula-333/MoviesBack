@@ -14,7 +14,7 @@ module.exports.createUser = async (req,res)=>{
         message: 'Usuario creado correctamente'})
     }catch (error) {
       console.error(error);
-      res.status(500).json({
+      res.status(400).json({
           message: 'Error al registrarse'
       });
   }
@@ -62,7 +62,7 @@ module.exports.getUser = async (req,res)=>{
     res.json(data2);
    }catch (error) {
     console.error(error);
-    res.status(500).json({
+    res.status(400).json({
         message: 'Error al acceder al usuario'
     });
 }
@@ -78,7 +78,7 @@ module.exports.removeUser = async (req, res) => {
       res.json(remove);
   } catch (error) {
       console.error(error);
-      res.status(500).json({
+      res.status(400).json({
           message: 'Error al eliminar usuario'
       });
 
