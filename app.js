@@ -9,7 +9,7 @@ const routesMovie = require ('./components/movie/router.js');
 const routesUser = require ('./components/user/router.js');
 const routesOrder = require ('./components/order/router.js');
 
-const PORT = process.env.PORT || 3001;
+const PORT = process.env.PORT || 3003;
 
 const mongoose = require('mongoose');
 //mongodb+srv://admin1:yrTKyfTqZYIFi6cH@cluster0.dp8tm.mongodb.net/moviesback?retryWrites=true&w=majority
@@ -27,9 +27,9 @@ mongoose.connect(MONGO_URI,{
 
 
 app.use(express.json());
-app.use ('/movie/', routesMovie);
-app.use ('/order/', routesOrder);
-app.use ('/user/', routesUser);
+app.use ('/movie', routesMovie);
+app.use ('/order', routesOrder);
+app.use ('/user', routesUser);
 
 app.listen(PORT,()=>console.log('Servidor levantado en ' + PORT));
 
