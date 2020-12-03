@@ -7,10 +7,17 @@ const secret = 'migatitobonito'
 ////////////////..: CREAR PERFIL :..////////////////
 
 module.exports.createUser = async (req,res)=>{
-    const user = new Model (req.body);
-    await user.save();
-    res.json(user);
-    console.log('usuario')
+    try{
+      const user = new Model (req.body);
+      await user.save();
+      res.json({user, 
+        message: 'Usuario creado correctamente'})
+    }catch (error) {
+      console.error(error);
+      res.status(500).json({
+          message: 'Error al registrarse'
+      });
+  }
 }
 
 
@@ -50,16 +57,30 @@ module.exports.login = (req, res, next)=>{
 
 module.exports.getUser = async (req,res)=>{
 
+   try{
     const data2 = await User.findOne({_id: req.params.id})
     res.json(data2);
+   }catch (error) {
+    console.error(error);
+    res.status(500).json({
+        message: 'Error al acceder al usuario'
+    });
+}
 }
 
 
 //////////////////..: BORRAR PERFIL :..////////////////////
 
 
-module.exports.removeUser = async (req, res) =>{
+module.exports.removeUser = async (req, res) => {
+  try {
+      const remove = await User.deleteOne({ _id: req.params.id });
+      res.json(remove);
+  } catch (error) {
+      console.error(error);
+      res.status(500).json({
+          message: 'Error al eliminar usuario'
+      });
 
-    const remove = await User.deleteOne(req.query.id);
-    res.json(remove);
+  }
 }
