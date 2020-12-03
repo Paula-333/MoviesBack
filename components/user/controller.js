@@ -8,7 +8,8 @@ const secret = 'migatitobonito'
 
 module.exports.createUser = async (req,res)=>{
     try{
-      const user = new Model (req.body);
+      const user = new User (req.body);
+      console.log({user:user})
       await user.save();
       res.json({user, 
         message: 'Usuario creado correctamente'})

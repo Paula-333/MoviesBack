@@ -22,7 +22,7 @@ mongoose.connect(MONGO_URI,{
     useUnifiedTopology:true,
     useFindAndModify: false
 })
-.then(()=> console.log('mongoose conectado'))
+.then(()=> console.log('mongoose conectado' + MONGO_URI))
 .catch( e => console.error('mongoose erroneo ', e));
 
 
