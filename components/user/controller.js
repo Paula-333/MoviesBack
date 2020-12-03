@@ -10,6 +10,7 @@ module.exports.createUser = async (req,res)=>{
     const user = new Model (req.body);
     await user.save();
     res.json(user);
+    console.log('usuario')
 }
 
 
