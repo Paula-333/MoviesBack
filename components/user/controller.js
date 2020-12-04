@@ -35,7 +35,7 @@ module.exports.login = (req, res, next)=>{
     const token = jwt.sign({user:data.id}, secret, {expiresIn: 60 * 60 *24});
     res.json({token: token, mensaje: 'login correcto'})
 
-    //validar token//Esto creo que es asi no me da ningun error.
+    //validar token
 
     jwt.verify(token, secret, function(err, token) {
         if (err) {
