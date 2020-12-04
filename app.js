@@ -9,20 +9,20 @@ const routesMovie = require ('./components/movie/router.js');
 const routesUser = require ('./components/user/router.js');
 const routesOrder = require ('./components/order/router.js');
 
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3004;
 
 const mongoose = require('mongoose');
 //mongodb+srv://admin1:yrTKyfTqZYIFi6cH@cluster0.dp8tm.mongodb.net/moviesback?retryWrites=true&w=majority
 
-const MONGO_URI = process.env.MONGO_URI ||'mongodb://localhost:27017/moviesback';
+const MongoURI = process.env.MongoURI ||'mongodb://localhost:27017/moviesback';
 //const monguri2 = "mongodb+srv://admin1:yrTKyfTqZYIFi6cH@cluster0.dp8tm.mongodb.net/moviesback?retryWrites=true&w=majority"
-mongoose.connect(MONGO_URI,{
+mongoose.connect(MongoURI,{
     useCreateIndex:true,
     useNewUrlParser:true,
     useUnifiedTopology:true,
     useFindAndModify: false
 })
-.then(()=> console.log('mongoose conectado' + MONGO_URI))
+.then(()=> console.log('mongoose conectado' + MongoURI))
 .catch( e => console.error('mongoose erroneo ', e));
 
 
