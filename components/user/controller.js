@@ -11,8 +11,8 @@ module.exports.createUser = async (req,res)=>{
       const user = new User (req.body);
       console.log({user:user})
       await user.save();
-      res.json({user, 
-        message: 'Usuario creado correctamente'})
+      res.json(user)
+      
     }catch (error) {
       console.error(error);
       res.status(400).json({
